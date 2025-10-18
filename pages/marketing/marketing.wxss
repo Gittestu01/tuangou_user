@@ -1,0 +1,438 @@
+/* pages/marketing/marketing.wxss */
+.marketing-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 用户状态卡片 */
+.status-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.user-level {
+  font-size: 14px;
+  color: #666;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.status-badge.captain {
+  background-color: #fff5f2;
+  border-color: #ff6b35;
+}
+
+.badge-text {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.status-badge.captain .badge-text {
+  color: #ff6b35;
+}
+
+.status-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff6b35;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 团长申请 */
+.captain-apply {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.apply-header {
+  margin-bottom: 20px;
+}
+
+.apply-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.apply-desc {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.apply-btn {
+  padding: 15px 40px;
+  background-color: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 团长功能 */
+.captain-functions {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-icon {
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.function-info {
+  flex: 1;
+}
+
+.function-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.function-desc {
+  font-size: 14px;
+  color: #666;
+}
+
+.function-arrow {
+  font-size: 16px;
+  color: #999;
+}
+
+/* 今日业绩 */
+.performance-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.section-more {
+  font-size: 14px;
+  color: #ff6b35;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.performance-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.performance-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6b35;
+  margin-bottom: 4px;
+}
+
+.performance-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 推广中心 */
+.promotion-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.promotion-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.promotion-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.promotion-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.promotion-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.promotion-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.promotion-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.btn-icon {
+  font-size: 16px;
+}
+
+.btn-text {
+  font-size: 14px;
+}
+
+/* 推广码展示 */
+.qr-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.qr-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  max-width: 300px;
+  margin: 20px;
+}
+
+.qr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.qr-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.qr-close {
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+}
+
+.qr-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+.qr-desc {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 邀请记录 */
+.invite-records {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.record-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.record-info {
+  flex: 1;
+}
+
+.record-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.record-type {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.record-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.record-reward {
+  text-align: right;
+}
+
+.reward-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff6b35;
+}
+
+/* 营销工具 */
+.tools-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.tool-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.tool-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}

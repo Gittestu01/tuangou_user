@@ -1,0 +1,185 @@
+<!--pages/marketing/marketing.wxml-->
+<view class="marketing-container">
+  <!-- 用户状态卡片 -->
+  <view class="status-card">
+    <view class="status-header">
+      <image class="user-avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <text class="user-name">{{userInfo.name}}</text>
+        <text class="user-level">{{userInfo.level}}</text>
+      </view>
+      <view class="status-badge" wx:if="{{!isCaptain}}">
+        <text class="badge-text">普通用户</text>
+      </view>
+      <view class="status-badge captain" wx:else>
+        <text class="badge-text">团长</text>
+      </view>
+    </view>
+    
+    <view class="status-stats">
+      <view class="stat-item">
+        <text class="stat-value">{{userInfo.points}}</text>
+        <text class="stat-label">积分余额</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">¥{{userInfo.balance}}</text>
+        <text class="stat-label">可提现金额</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{userInfo.inviteCount}}</text>
+        <text class="stat-label">邀请人数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 团长申请入口 -->
+  <view class="captain-apply" wx:if="{{!isCaptain}}">
+    <view class="apply-header">
+      <text class="apply-title">成为团长</text>
+      <text class="apply-desc">开启团购事业，赚取丰厚佣金</text>
+    </view>
+    <button class="apply-btn" bindtap="onApplyCaptain">立即申请</button>
+  </view>
+
+  <!-- 团长功能入口 -->
+  <view class="captain-functions" wx:if="{{isCaptain}}">
+    <view class="function-item" bindtap="onMyGroups">
+      <view class="function-icon">📦</view>
+      <view class="function-info">
+        <text class="function-title">我的开团</text>
+        <text class="function-desc">管理我的团购活动</text>
+      </view>
+      <text class="function-arrow">></text>
+    </view>
+    
+    <view class="function-item" bindtap="onPerformance">
+      <view class="function-icon">📊</view>
+      <view class="function-info">
+        <text class="function-title">业绩提现</text>
+        <text class="function-desc">查看收益并申请提现</text>
+      </view>
+      <text class="function-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 今日业绩 -->
+  <view class="performance-section" wx:if="{{isCaptain}}">
+    <view class="section-header">
+      <text class="section-title">今日业绩</text>
+      <text class="section-more" bindtap="onViewPerformance">查看详情 ></text>
+    </view>
+    
+    <view class="performance-grid">
+      <view class="performance-item">
+        <text class="performance-value">{{todayStats.groupCount}}</text>
+        <text class="performance-label">开团数</text>
+      </view>
+      <view class="performance-item">
+        <text class="performance-value">¥{{todayStats.earnings}}</text>
+        <text class="performance-label">今日收益</text>
+      </view>
+      <view class="performance-item">
+        <text class="performance-value">{{todayStats.orderCount}}</text>
+        <text class="performance-label">订单数</text>
+      </view>
+      <view class="performance-item">
+        <text class="performance-value">{{todayStats.customerCount}}</text>
+        <text class="performance-label">客户数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推广中心 -->
+  <view class="promotion-section">
+    <view class="section-header">
+      <text class="section-title">推广中心</text>
+    </view>
+    
+    <view class="promotion-stats">
+      <view class="promotion-item">
+        <text class="promotion-value">{{promotionStats.totalInvites}}</text>
+        <text class="promotion-label">总邀请人数</text>
+      </view>
+      <view class="promotion-item">
+        <text class="promotion-value">{{promotionStats.captainInvites}}</text>
+        <text class="promotion-label">邀请团长数</text>
+      </view>
+      <view class="promotion-item">
+        <text class="promotion-value">¥{{promotionStats.totalReward}}</text>
+        <text class="promotion-label">累计奖励</text>
+      </view>
+    </view>
+    
+    <view class="promotion-actions">
+      <button class="promotion-btn" bindtap="onGenerateQR">
+        <text class="btn-icon">📱</text>
+        <text class="btn-text">生成推广码</text>
+      </button>
+      <button class="promotion-btn" bindtap="onShareInvite">
+        <text class="btn-icon">📤</text>
+        <text class="btn-text">邀请好友</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 推广码展示 -->
+  <view class="qr-section" wx:if="{{showQR}}">
+    <view class="qr-header">
+      <text class="qr-title">我的推广码</text>
+      <text class="qr-close" bindtap="onCloseQR">✕</text>
+    </view>
+    
+    <view class="qr-content">
+      <image class="qr-image" src="{{qrCode}}" mode="aspectFit"></image>
+      <text class="qr-desc">长按保存图片，分享给好友</text>
+    </view>
+  </view>
+
+  <!-- 邀请记录 -->
+  <view class="invite-records">
+    <view class="section-header">
+      <text class="section-title">邀请记录</text>
+      <text class="section-more" bindtap="onViewRecords">查看全部 ></text>
+    </view>
+    
+    <view class="records-list">
+      <view class="record-item" wx:for="{{inviteRecords}}" wx:key="id">
+        <image class="record-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="record-info">
+          <text class="record-name">{{item.name}}</text>
+          <text class="record-type">{{item.type}}</text>
+          <text class="record-time">{{item.inviteTime}}</text>
+        </view>
+        <view class="record-reward">
+          <text class="reward-amount">+¥{{item.reward}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 营销工具 -->
+  <view class="tools-section">
+    <view class="section-header">
+      <text class="section-title">营销工具</text>
+    </view>
+    
+    <view class="tools-grid">
+      <view class="tool-item" bindtap="onGroupShare">
+        <view class="tool-icon">🎯</view>
+        <text class="tool-text">团购分享</text>
+      </view>
+      <view class="tool-item" bindtap="onGroupInvite">
+        <view class="tool-icon">👥</view>
+        <text class="tool-text">邀请参团</text>
+      </view>
+      <view class="tool-item" bindtap="onGroupCreate">
+        <view class="tool-icon">➕</view>
+        <text class="tool-text">创建团购</text>
+      </view>
+      <view class="tool-item" bindtap="onGroupManage">
+        <view class="tool-icon">⚙️</view>
+        <text class="tool-text">团购管理</text>
+      </view>
+    </view>
+  </view>
+</view>

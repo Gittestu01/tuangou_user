@@ -1,0 +1,50 @@
+<!--pages/category/category.wxml-->
+<view class="category-container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input" bindtap="onSearchTap">
+      <text class="search-placeholder">搜索商品...</text>
+      <text class="search-icon">🔍</text>
+    </view>
+  </view>
+
+  <!-- 分类内容 -->
+  <view class="category-content">
+    <!-- 左侧分类列表 -->
+    <view class="category-sidebar">
+      <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categoryList}}" 
+            wx:key="id" 
+            bindtap="onCategoryChange" 
+            data-id="{{item.id}}">
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- 右侧商品列表 -->
+    <view class="product-content">
+      <view class="product-section" wx:for="{{productSections}}" wx:key="id">
+        <view class="section-header">
+          <text class="section-title">{{item.title}}</text>
+        </view>
+        
+        <view class="product-grid">
+          <view class="product-item" wx:for="{{item.products}}" wx:key="id" bindtap="onProductTap" data-item="{{item}}">
+            <image class="product-image" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="product-info">
+              <text class="product-title">{{item.title}}</text>
+              <view class="product-price">
+                <text class="price">¥{{item.price}}</text>
+                <text class="price-original">¥{{item.originalPrice}}</text>
+              </view>
+              <view class="product-meta">
+                <text class="product-captain">{{item.captainName}}</text>
+                <text class="product-countdown">{{item.countdown}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

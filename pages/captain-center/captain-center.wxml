@@ -1,0 +1,194 @@
+<!--pages/captain-center/captain-center.wxml-->
+<view class="captain-center-container">
+  <!-- 数据总览 -->
+  <view class="overview-section">
+    <view class="overview-header">
+      <text class="overview-title">数据总览</text>
+      <text class="overview-period">今日</text>
+    </view>
+    
+    <view class="overview-stats">
+      <view class="stat-card">
+        <text class="stat-value">{{overviewStats.groupCount}}</text>
+        <text class="stat-label">开团数</text>
+        <text class="stat-change positive">+{{overviewStats.groupCountChange}}</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-value">¥{{overviewStats.earnings}}</text>
+        <text class="stat-label">今日收益</text>
+        <text class="stat-change positive">+¥{{overviewStats.earningsChange}}</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-value">{{overviewStats.orderCount}}</text>
+        <text class="stat-label">订单数</text>
+        <text class="stat-change positive">+{{overviewStats.orderCountChange}}</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-value">{{overviewStats.customerCount}}</text>
+        <text class="stat-label">客户数</text>
+        <text class="stat-change positive">+{{overviewStats.customerCountChange}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="onCreateGroup">
+      <view class="action-icon">➕</view>
+      <text class="action-text">新开团</text>
+    </view>
+    
+    <view class="action-item" bindtap="onManageOrders">
+      <view class="action-icon">📋</view>
+      <text class="action-text">订单管理</text>
+    </view>
+    
+    <view class="action-item" bindtap="onViewPerformance">
+      <view class="action-icon">📊</view>
+      <text class="action-text">业绩查看</text>
+    </view>
+    
+    <view class="action-item" bindtap="onCustomerService">
+      <view class="action-icon">💬</view>
+      <text class="action-text">客服支持</text>
+    </view>
+  </view>
+
+  <!-- 我的开团 -->
+  <view class="my-groups-section">
+    <view class="section-header">
+      <text class="section-title">我的开团</text>
+      <text class="section-more" bindtap="onViewAllGroups">查看全部 ></text>
+    </view>
+    
+    <view class="groups-list">
+      <view class="group-item" wx:for="{{myGroups}}" wx:key="id" bindtap="onViewGroup" data-item="{{item}}">
+        <image class="group-image" src="{{item.image}}" mode="aspectFill"></image>
+        
+        <view class="group-info">
+          <text class="group-title">{{item.title}}</text>
+          <view class="group-price">
+            <text class="price">¥{{item.price}}</text>
+            <text class="price-original">¥{{item.originalPrice}}</text>
+          </view>
+          
+          <view class="group-progress">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: {{item.progress}}%"></view>
+            </view>
+            <text class="progress-text">{{item.joinedCount}}/{{item.targetCount}}人</text>
+          </view>
+          
+          <view class="group-meta">
+            <text class="group-status {{item.status}}">{{item.statusText}}</text>
+            <text class="group-time">{{item.endTime}}</text>
+          </view>
+        </view>
+        
+        <view class="group-actions">
+          <button class="action-btn" bindtap="onEditGroup" data-item="{{item}}">编辑</button>
+          <button class="action-btn" bindtap="onShareGroup" data-item="{{item}}">分享</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 待处理订单 -->
+  <view class="pending-orders-section">
+    <view class="section-header">
+      <text class="section-title">待处理订单</text>
+      <text class="section-more" bindtap="onViewAllOrders">查看全部 ></text>
+    </view>
+    
+    <view class="orders-list">
+      <view class="order-item" wx:for="{{pendingOrders}}" wx:key="id" bindtap="onViewOrder" data-item="{{item}}">
+        <view class="order-header">
+          <text class="order-id">订单号：{{item.orderId}}</text>
+          <text class="order-status">{{item.statusText}}</text>
+        </view>
+        
+        <view class="order-content">
+          <image class="order-image" src="{{item.productImage}}" mode="aspectFill"></image>
+          <view class="order-info">
+            <text class="order-title">{{item.productTitle}}</text>
+            <text class="order-quantity">数量：{{item.quantity}}</text>
+            <text class="order-amount">金额：¥{{item.amount}}</text>
+            <text class="order-customer">客户：{{item.customerName}}</text>
+          </view>
+        </view>
+        
+        <view class="order-actions">
+          <button class="action-btn secondary" bindtap="onContactCustomer" data-item="{{item}}">联系客户</button>
+          <button class="action-btn primary" bindtap="onProcessOrder" data-item="{{item}}">处理订单</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 业绩趋势 -->
+  <view class="performance-trend-section">
+    <view class="section-header">
+      <text class="section-title">业绩趋势</text>
+      <text class="section-more" bindtap="onViewPerformanceDetail">查看详情 ></text>
+    </view>
+    
+    <view class="trend-chart">
+      <view class="chart-placeholder">
+        <text class="chart-text">业绩趋势图</text>
+        <text class="chart-desc">近7天收益趋势</text>
+      </view>
+    </view>
+    
+    <view class="trend-stats">
+      <view class="trend-item">
+        <text class="trend-label">本周收益</text>
+        <text class="trend-value">¥{{weekEarnings}}</text>
+      </view>
+      <view class="trend-item">
+        <text class="trend-label">本月收益</text>
+        <text class="trend-value">¥{{monthEarnings}}</text>
+      </view>
+      <view class="trend-item">
+        <text class="trend-label">累计收益</text>
+        <text class="trend-value">¥{{totalEarnings}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提货核销 -->
+  <view class="pickup-section">
+    <view class="section-header">
+      <text class="section-title">提货核销</text>
+    </view>
+    
+    <view class="pickup-actions">
+      <button class="pickup-btn" bindtap="onScanPickup">
+        <text class="btn-icon">📱</text>
+        <text class="btn-text">扫码核销</text>
+      </button>
+      
+      <button class="pickup-btn" bindtap="onManualPickup">
+        <text class="btn-icon">✍️</text>
+        <text class="btn-text">手动核销</text>
+      </button>
+    </view>
+    
+    <view class="pickup-stats">
+      <view class="pickup-item">
+        <text class="pickup-value">{{pickupStats.today}}</text>
+        <text class="pickup-label">今日核销</text>
+      </view>
+      <view class="pickup-item">
+        <text class="pickup-value">{{pickupStats.pending}}</text>
+        <text class="pickup-label">待核销</text>
+      </view>
+      <view class="pickup-item">
+        <text class="pickup-value">{{pickupStats.total}}</text>
+        <text class="pickup-label">累计核销</text>
+      </view>
+    </view>
+  </view>
+</view>

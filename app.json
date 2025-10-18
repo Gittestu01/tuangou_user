@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/category/category",
+    "pages/marketing/marketing",
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "pages/product-detail/product-detail",
+    "pages/order-confirm/order-confirm",
+    "pages/payment-success/payment-success",
+    "pages/captain-center/captain-center",
+    "pages/captain-orders/captain-orders",
+    "pages/captain-performance/captain-performance"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff6b35",
+    "navigationBarTitleText": "团购小程序",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#ff6b35",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "images/category.png",
+        "selectedIconPath": "images/category-active.png"
+      },
+      {
+        "pagePath": "pages/marketing/marketing",
+        "text": "营销中心",
+        "iconPath": "images/marketing.png",
+        "selectedIconPath": "images/marketing-active.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/cart.png",
+        "selectedIconPath": "images/cart-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于推荐附近的团购活动"
+    }
+  },
+  "requiredBackgroundModes": ["location"],
+  "sitemapLocation": "sitemap.json"
+}

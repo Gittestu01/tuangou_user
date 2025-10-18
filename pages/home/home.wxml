@@ -1,0 +1,87 @@
+<!--pages/home/home.wxml-->
+<view class="home-container">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input" bindtap="onSearchTap">
+      <text class="search-placeholder">搜索商品...</text>
+      <text class="search-icon">🔍</text>
+    </view>
+  </view>
+
+  <!-- 定位信息 -->
+  <view class="location-bar">
+    <view class="location-info" bindtap="onLocationTap">
+      <text class="location-icon">📍</text>
+      <text class="location-text">{{locationText}}</text>
+      <text class="location-arrow">></text>
+    </view>
+  </view>
+
+  <!-- Banner轮播 -->
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+      <swiper-item wx:for="{{bannerList}}" wx:key="id">
+        <image class="banner-image" src="{{item.image}}" mode="aspectFill" bindtap="onBannerTap" data-item="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 今日开团列表 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">今日开团</text>
+      <text class="section-more" bindtap="onMoreGroupTap">更多 ></text>
+    </view>
+    <view class="group-list">
+      <view class="group-item" wx:for="{{groupList}}" wx:key="id" bindtap="onGroupTap" data-item="{{item}}">
+        <image class="group-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="group-info">
+          <text class="group-title">{{item.title}}</text>
+          <view class="group-price">
+            <text class="price">¥{{item.price}}</text>
+            <text class="price-original">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="group-meta">
+            <text class="group-countdown">{{item.countdown}}</text>
+            <text class="group-captain">{{item.captainName}}</text>
+          </view>
+          <view class="group-progress">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: {{item.progress}}%"></view>
+            </view>
+            <text class="progress-text">{{item.joinedCount}}/{{item.targetCount}}人</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 附近团购推荐 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">附近团购</text>
+      <text class="section-more" bindtap="onMoreNearbyTap">更多 ></text>
+    </view>
+    <view class="nearby-list">
+      <view class="nearby-item" wx:for="{{nearbyList}}" wx:key="id" bindtap="onNearbyTap" data-item="{{item}}">
+        <image class="nearby-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="nearby-info">
+          <text class="nearby-title">{{item.title}}</text>
+          <view class="nearby-price">
+            <text class="price">¥{{item.price}}</text>
+            <text class="price-original">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="nearby-meta">
+            <text class="nearby-distance">{{item.distance}}km</text>
+            <text class="nearby-captain">{{item.captainName}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

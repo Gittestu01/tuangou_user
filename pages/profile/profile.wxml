@@ -1,0 +1,182 @@
+<!--pages/profile/profile.wxml-->
+<view class="profile-container">
+  <!-- 用户信息头部 -->
+  <view class="user-header">
+    <view class="user-info" bindtap="onLogin" wx:if="{{!userInfo}}">
+      <image class="user-avatar" src="/images/default-avatar.jpg" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="login-text">点击登录</text>
+        <text class="login-desc">登录后享受更多服务</text>
+      </view>
+      <text class="login-arrow">></text>
+    </view>
+    
+    <view class="user-info" bindtap="onEditProfile" wx:else>
+      <image class="user-avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="user-name">{{userInfo.name}}</text>
+        <text class="user-level">{{userInfo.level}}</text>
+        <view class="user-stats">
+          <text class="stat-item">积分：{{userInfo.points}}</text>
+          <text class="stat-item">余额：¥{{userInfo.balance}}</text>
+        </view>
+      </view>
+      <text class="edit-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 订单管理 -->
+  <view class="order-section">
+    <view class="section-header">
+      <text class="section-title">我的订单</text>
+      <text class="section-more" bindtap="onViewAllOrders">查看全部 ></text>
+    </view>
+    
+    <view class="order-stats">
+      <view class="order-item" bindtap="onViewOrders" data-status="pending">
+        <view class="order-icon">⏰</view>
+        <text class="order-label">待付款</text>
+        <text class="order-count" wx:if="{{orderStats.pending > 0}}">{{orderStats.pending}}</text>
+      </view>
+      
+      <view class="order-item" bindtap="onViewOrders" data-status="shipping">
+        <view class="order-icon">🚚</view>
+        <text class="order-label">待发货</text>
+        <text class="order-count" wx:if="{{orderStats.shipping > 0}}">{{orderStats.shipping}}</text>
+      </view>
+      
+      <view class="order-item" bindtap="onViewOrders" data-status="delivered">
+        <view class="order-icon">📦</view>
+        <text class="order-label">待收货</text>
+        <text class="order-count" wx:if="{{orderStats.delivered > 0}}">{{orderStats.delivered}}</text>
+      </view>
+      
+      <view class="order-item" bindtap="onViewOrders" data-status="completed">
+        <view class="order-icon">✅</view>
+        <text class="order-label">已完成</text>
+        <text class="order-count" wx:if="{{orderStats.completed > 0}}">{{orderStats.completed}}</text>
+      </view>
+      
+      <view class="order-item" bindtap="onViewOrders" data-status="refund">
+        <view class="order-icon">🔄</view>
+        <text class="order-label">退换货</text>
+        <text class="order-count" wx:if="{{orderStats.refund > 0}}">{{orderStats.refund}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-group">
+      <view class="menu-item" bindtap="onMyFavorites">
+        <view class="menu-icon">❤️</view>
+        <text class="menu-text">我的收藏</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onMyAddress">
+        <view class="menu-icon">📍</view>
+        <text class="menu-text">收货地址</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onMyCoupons">
+        <view class="menu-icon">🎫</view>
+        <text class="menu-text">优惠券</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+    
+    <view class="menu-group">
+      <view class="menu-item" bindtap="onMyPoints">
+        <view class="menu-icon">💎</view>
+        <text class="menu-text">积分中心</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onMyInvite">
+        <view class="menu-icon">👥</view>
+        <text class="menu-text">邀请好友</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onMyQR">
+        <view class="menu-icon">📱</view>
+        <text class="menu-text">我的推广码</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+    
+    <view class="menu-group">
+      <view class="menu-item" bindtap="onCustomerService">
+        <view class="menu-icon">💬</view>
+        <text class="menu-text">客服中心</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onFeedback">
+        <view class="menu-icon">📝</view>
+        <text class="menu-text">意见反馈</text>
+        <text class="menu-arrow">></text>
+      </view>
+      
+      <view class="menu-item" bindtap="onAbout">
+        <view class="menu-icon">ℹ️</view>
+        <text class="menu-text">关于我们</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 团长入口 -->
+  <view class="captain-section" wx:if="{{!isCaptain}}">
+    <view class="captain-card" bindtap="onApplyCaptain">
+      <view class="captain-content">
+        <view class="captain-icon">👑</view>
+        <view class="captain-info">
+          <text class="captain-title">成为团长</text>
+          <text class="captain-desc">开启团购事业，赚取丰厚佣金</text>
+        </view>
+      </view>
+      <text class="captain-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 团长功能入口 -->
+  <view class="captain-functions" wx:if="{{isCaptain}}">
+    <view class="function-header">
+      <text class="function-title">团长中心</text>
+    </view>
+    
+    <view class="function-grid">
+      <view class="function-item" bindtap="onCaptainCenter">
+        <view class="function-icon">📊</view>
+        <text class="function-text">数据总览</text>
+      </view>
+      
+      <view class="function-item" bindtap="onMyGroups">
+        <view class="function-icon">📦</view>
+        <text class="function-text">我的开团</text>
+      </view>
+      
+      <view class="function-item" bindtap="onGroupOrders">
+        <view class="function-icon">📋</view>
+        <text class="function-text">订单管理</text>
+      </view>
+      
+      <view class="function-item" bindtap="onPerformance">
+        <view class="function-icon">💰</view>
+        <text class="function-text">业绩提现</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设置 -->
+  <view class="settings-section">
+    <view class="settings-item" bindtap="onSettings">
+      <view class="settings-icon">⚙️</view>
+      <text class="settings-text">设置</text>
+      <text class="settings-arrow">></text>
+    </view>
+  </view>
+</view>

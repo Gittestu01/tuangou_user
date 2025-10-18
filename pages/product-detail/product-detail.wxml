@@ -1,0 +1,112 @@
+<!--pages/product-detail/product-detail.wxml-->
+<view class="product-detail-container">
+  <!-- 商品图片/视频展示区 -->
+  <view class="product-media">
+    <swiper class="product-swiper" indicator-dots="true" autoplay="false">
+      <swiper-item wx:for="{{product.images}}" wx:key="*this">
+        <image class="product-image" src="{{item}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 商品基本信息 -->
+  <view class="product-info">
+    <view class="product-title">{{product.title}}</view>
+    <view class="product-subtitle">{{product.subtitle}}</view>
+    
+    <view class="product-price">
+      <text class="price">¥{{product.price}}</text>
+      <text class="price-original">¥{{product.originalPrice}}</text>
+      <text class="discount-tag">{{product.discount}}折</text>
+    </view>
+
+    <view class="product-meta">
+      <view class="meta-item">
+        <text class="meta-label">库存</text>
+        <text class="meta-value">{{product.stock}}件</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">截止时间</text>
+        <text class="meta-value countdown">{{product.endTime}}</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">已参团</text>
+        <text class="meta-value">{{product.joinedCount}}/{{product.targetCount}}人</text>
+      </view>
+    </view>
+
+    <!-- 团购进度 -->
+    <view class="group-progress">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{product.progress}}%"></view>
+      </view>
+      <text class="progress-text">还差{{product.targetCount - product.joinedCount}}人成团</text>
+    </view>
+  </view>
+
+  <!-- 团长信息 -->
+  <view class="captain-info">
+    <view class="captain-header">
+      <text class="section-title">团长信息</text>
+    </view>
+    <view class="captain-card">
+      <image class="captain-avatar" src="{{captain.avatar}}" mode="aspectFill"></image>
+      <view class="captain-details">
+        <view class="captain-name">{{captain.name}}</view>
+        <view class="captain-address">{{captain.address}}</view>
+        <view class="captain-stats">
+          <text class="stat-item">开团{{captain.groupCount}}次</text>
+          <text class="stat-item">好评率{{captain.rating}}%</text>
+        </view>
+      </view>
+      <view class="captain-actions">
+        <button class="btn btn-small btn-secondary" bindtap="onContactCaptain">联系团长</button>
+        <button class="btn btn-small btn-secondary" bindtap="onViewLocation">查看位置</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品详情 -->
+  <view class="product-details">
+    <view class="details-header">
+      <text class="section-title">商品详情</text>
+    </view>
+    <view class="details-content">
+      <rich-text nodes="{{product.details}}"></rich-text>
+    </view>
+  </view>
+
+  <!-- 参团用户列表 -->
+  <view class="joiners-list" wx:if="{{joiners.length > 0}}">
+    <view class="joiners-header">
+      <text class="section-title">参团用户</text>
+      <text class="joiners-count">{{joiners.length}}人已参团</text>
+    </view>
+    <view class="joiners-grid">
+      <view class="joiner-item" wx:for="{{joiners}}" wx:key="id">
+        <image class="joiner-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <text class="joiner-name">{{item.name}}</text>
+        <text class="joiner-time">{{item.joinTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <view class="action-left">
+      <button class="action-btn" bindtap="onCollect">
+        <text class="action-icon">{{isCollected ? '❤️' : '🤍'}}</text>
+        <text class="action-text">收藏</text>
+      </button>
+      <button class="action-btn" bindtap="onShare">
+        <text class="action-icon">📤</text>
+        <text class="action-text">分享</text>
+      </button>
+    </view>
+    <view class="action-right">
+      <button class="btn btn-primary btn-large" bindtap="onJoinGroup">
+        立即参团
+      </button>
+    </view>
+  </view>
+</view>

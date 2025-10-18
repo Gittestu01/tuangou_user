@@ -1,0 +1,119 @@
+<!--pages/payment-success/payment-success.wxml-->
+<view class="payment-success-container">
+  <!-- 支付成功状态 -->
+  <view class="success-status">
+    <view class="success-icon">✅</view>
+    <text class="success-title">支付成功</text>
+    <text class="success-desc">您的订单已提交，请等待团长确认</text>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="order-info">
+    <view class="info-header">
+      <text class="info-title">订单信息</text>
+      <text class="order-id">订单号：{{orderId}}</text>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">商品名称</text>
+      <text class="info-value">{{order.product.title}}</text>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">购买数量</text>
+      <text class="info-value">{{order.quantity}}件</text>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">商品金额</text>
+      <text class="info-value">¥{{order.productTotal}}</text>
+    </view>
+    
+    <view class="info-item" wx:if="{{order.pointsDeduction > 0}}">
+      <text class="info-label">积分抵扣</text>
+      <text class="info-value deduction">-¥{{order.pointsDeduction}}</text>
+    </view>
+    
+    <view class="info-item" wx:if="{{order.deliveryFee > 0}}">
+      <text class="info-label">配送费</text>
+      <text class="info-value">¥{{order.deliveryFee}}</text>
+    </view>
+    
+    <view class="info-item total">
+      <text class="info-label">实付金额</text>
+      <text class="info-value total-amount">¥{{order.totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 收货信息 -->
+  <view class="delivery-info">
+    <view class="info-header">
+      <text class="info-title">收货信息</text>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">收货方式</text>
+      <text class="info-value">{{order.deliveryType === 'captain' ? '团长自提' : '送货上门'}}</text>
+    </view>
+    
+    <view class="info-item" wx:if="{{order.deliveryType === 'captain'}}">
+      <text class="info-label">团长信息</text>
+      <text class="info-value">{{order.captain.name}} - {{order.captain.address}}</text>
+    </view>
+    
+    <view class="info-item" wx:if="{{order.deliveryType === 'home' && order.selectedAddress}}">
+      <text class="info-label">收货地址</text>
+      <text class="info-value">{{order.selectedAddress.detail}}</text>
+    </view>
+  </view>
+
+  <!-- 团购进度 -->
+  <view class="group-progress">
+    <view class="progress-header">
+      <text class="progress-title">团购进度</text>
+      <text class="progress-status">{{groupStatus}}</text>
+    </view>
+    
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{groupProgress}}%"></view>
+    </view>
+    
+    <view class="progress-info">
+      <text class="progress-text">还差{{remainingCount}}人成团</text>
+      <text class="progress-time">截止时间：{{order.endTime}}</text>
+    </view>
+  </view>
+
+  <!-- 温馨提示 -->
+  <view class="tips-section">
+    <view class="tips-header">
+      <text class="tips-title">温馨提示</text>
+    </view>
+    
+    <view class="tips-content">
+      <text class="tips-item">• 请保持手机畅通，团长会及时联系您</text>
+      <text class="tips-item">• 团购成功后，请在规定时间内提货</text>
+      <text class="tips-item">• 如有问题，可联系团长或客服</text>
+      <text class="tips-item">• 团购失败将自动退款到原支付方式</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn btn-secondary" bindtap="onViewOrder">查看订单</button>
+    <button class="btn btn-primary" bindtap="onBackHome">返回首页</button>
+  </view>
+
+  <!-- 分享团购 -->
+  <view class="share-section">
+    <view class="share-header">
+      <text class="share-title">邀请好友参团</text>
+      <text class="share-desc">分享给好友，一起享受优惠</text>
+    </view>
+    
+    <button class="share-btn" bindtap="onShareGroup">
+      <text class="share-icon">📤</text>
+      <text class="share-text">分享团购</text>
+    </button>
+  </view>
+</view>

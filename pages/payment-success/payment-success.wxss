@@ -1,0 +1,273 @@
+/* pages/payment-success/payment-success.wxss */
+.payment-success-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 支付成功状态 */
+.success-status {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.success-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.success-title {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.success-desc {
+  display: block;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 订单信息 */
+.order-info {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.order-id {
+  font-size: 14px;
+  color: #666;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item.total {
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 15px;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.info-value.deduction {
+  color: #ff6b35;
+}
+
+.info-value.total-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+/* 收货信息 */
+.delivery-info {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 团购进度 */
+.group-progress {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.progress-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-status {
+  font-size: 14px;
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #ff6b35;
+  transition: width 0.3s ease;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.progress-time {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 温馨提示 */
+.tips-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.tips-header {
+  margin-bottom: 15px;
+}
+
+.tips-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tips-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tips-item {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  flex: 1;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #666;
+  border: 1px solid #e9ecef;
+}
+
+.btn-primary {
+  background-color: #ff6b35;
+  color: #fff;
+}
+
+/* 分享团购 */
+.share-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.share-header {
+  margin-bottom: 20px;
+}
+
+.share-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.share-desc {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 auto;
+}
+
+.share-icon {
+  font-size: 18px;
+}
+
+.share-text {
+  font-size: 16px;
+}

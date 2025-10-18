@@ -1,0 +1,178 @@
+<!--pages/order-confirm/order-confirm.wxml-->
+<view class="order-confirm-container">
+  <!-- 商品信息 -->
+  <view class="product-section">
+    <view class="section-header">
+      <text class="section-title">商品信息</text>
+    </view>
+    <view class="product-item">
+      <image class="product-image" src="{{product.image}}" mode="aspectFill"></image>
+      <view class="product-info">
+        <text class="product-title">{{product.title}}</text>
+        <text class="product-subtitle">{{product.subtitle}}</text>
+        <view class="product-price">
+          <text class="price">¥{{product.price}}</text>
+          <text class="price-original">¥{{product.originalPrice}}</text>
+        </view>
+      </view>
+      <view class="product-quantity">
+        <text class="quantity-label">数量</text>
+        <view class="quantity-controls">
+          <button class="quantity-btn" bindtap="onQuantityChange" data-type="minus" disabled="{{quantity <= 1}}">-</button>
+          <text class="quantity-value">{{quantity}}</text>
+          <button class="quantity-btn" bindtap="onQuantityChange" data-type="plus" disabled="{{quantity >= product.stock}}">+</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收货方式 -->
+  <view class="delivery-section">
+    <view class="section-header">
+      <text class="section-title">收货方式</text>
+    </view>
+    <view class="delivery-options">
+      <view class="delivery-option {{deliveryType === 'captain' ? 'active' : ''}}" bindtap="onDeliveryTypeChange" data-type="captain">
+        <view class="option-content">
+          <text class="option-icon">🏪</text>
+          <view class="option-info">
+            <text class="option-title">团长自提</text>
+            <text class="option-desc">到团长指定地点自提</text>
+          </view>
+        </view>
+        <text class="option-check">{{deliveryType === 'captain' ? '✓' : ''}}</text>
+      </view>
+      <view class="delivery-option {{deliveryType === 'home' ? 'active' : ''}}" bindtap="onDeliveryTypeChange" data-type="home">
+        <view class="option-content">
+          <text class="option-icon">🚚</text>
+          <view class="option-info">
+            <text class="option-title">送货上门</text>
+            <text class="option-desc">团长送货到指定地址</text>
+          </view>
+        </view>
+        <text class="option-check">{{deliveryType === 'home' ? '✓' : ''}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="address-section" wx:if="{{deliveryType === 'home'}}">
+    <view class="section-header">
+      <text class="section-title">收货地址</text>
+      <text class="section-action" bindtap="onSelectAddress">选择地址</text>
+    </view>
+    <view class="address-item" wx:if="{{selectedAddress}}">
+      <view class="address-info">
+        <text class="address-name">{{selectedAddress.name}}</text>
+        <text class="address-phone">{{selectedAddress.phone}}</text>
+        <text class="address-detail">{{selectedAddress.detail}}</text>
+      </view>
+    </view>
+    <view class="address-placeholder" wx:else>
+      <text class="placeholder-text">请选择收货地址</text>
+    </view>
+  </view>
+
+  <!-- 团长信息 -->
+  <view class="captain-section" wx:if="{{deliveryType === 'captain'}}">
+    <view class="section-header">
+      <text class="section-title">团长信息</text>
+    </view>
+    <view class="captain-item">
+      <image class="captain-avatar" src="{{captain.avatar}}" mode="aspectFill"></image>
+      <view class="captain-info">
+        <text class="captain-name">{{captain.name}}</text>
+        <text class="captain-address">{{captain.address}}</text>
+        <text class="captain-phone">{{captain.phone}}</text>
+      </view>
+      <button class="contact-btn" bindtap="onContactCaptain">联系</button>
+    </view>
+  </view>
+
+  <!-- 积分抵扣 -->
+  <view class="points-section">
+    <view class="section-header">
+      <text class="section-title">积分抵扣</text>
+      <text class="points-balance">可用积分：{{userPoints}}</text>
+    </view>
+    <view class="points-item">
+      <view class="points-info">
+        <text class="points-label">使用积分</text>
+        <text class="points-desc">1积分=0.01元</text>
+      </view>
+      <view class="points-controls">
+        <input class="points-input" type="number" value="{{usedPoints}}" bindinput="onPointsInput" placeholder="0" maxlength="6"/>
+        <text class="points-unit">积分</text>
+      </view>
+    </view>
+    <view class="points-deduction" wx:if="{{usedPoints > 0}}">
+      <text class="deduction-label">积分抵扣</text>
+      <text class="deduction-amount">-¥{{pointsDeduction}}</text>
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="payment-section">
+    <view class="section-header">
+      <text class="section-title">支付方式</text>
+    </view>
+    <view class="payment-options">
+      <view class="payment-option {{paymentType === 'wechat' ? 'active' : ''}}" bindtap="onPaymentTypeChange" data-type="wechat">
+        <view class="option-content">
+          <text class="option-icon">💚</text>
+          <text class="option-title">微信支付</text>
+        </view>
+        <text class="option-check">{{paymentType === 'wechat' ? '✓' : ''}}</text>
+      </view>
+      <view class="payment-option {{paymentType === 'alipay' ? 'active' : ''}}" bindtap="onPaymentTypeChange" data-type="alipay">
+        <view class="option-content">
+          <text class="option-icon">💙</text>
+          <text class="option-title">支付宝</text>
+        </view>
+        <text class="option-check">{{paymentType === 'alipay' ? '✓' : ''}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 团购协议 -->
+  <view class="agreement-section">
+    <view class="agreement-item">
+      <checkbox class="agreement-checkbox" checked="{{agreed}}" bindchange="onAgreementChange"/>
+      <text class="agreement-text">我已阅读并同意</text>
+      <text class="agreement-link" bindtap="onViewAgreement">《团购协议》</text>
+    </view>
+  </view>
+
+  <!-- 底部订单信息 -->
+  <view class="bottom-summary">
+    <view class="summary-details">
+      <view class="summary-item">
+        <text class="summary-label">商品金额</text>
+        <text class="summary-value">¥{{productTotal}}</text>
+      </view>
+      <view class="summary-item" wx:if="{{pointsDeduction > 0}}">
+        <text class="summary-label">积分抵扣</text>
+        <text class="summary-value deduction">-¥{{pointsDeduction}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">配送费</text>
+        <text class="summary-value">¥{{deliveryFee}}</text>
+      </view>
+    </view>
+    <view class="summary-total">
+      <text class="total-label">实付金额</text>
+      <text class="total-amount">¥{{totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 底部确认按钮 -->
+  <view class="bottom-actions">
+    <view class="actions-left">
+      <text class="total-label">实付：</text>
+      <text class="total-amount">¥{{totalAmount}}</text>
+    </view>
+    <button class="confirm-btn" bindtap="onConfirmOrder" disabled="{{!agreed || (deliveryType === 'home' && !selectedAddress)}}">
+      确认支付
+    </button>
+  </view>
+</view>
