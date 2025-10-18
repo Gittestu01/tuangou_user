@@ -48,6 +48,7 @@ st.markdown("""
         border-radius: 25px;
         padding: 8px;
         box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        overflow: hidden;
     }
     
     .screen {
@@ -57,6 +58,7 @@ st.markdown("""
         border-radius: 20px;
         overflow: hidden;
         position: relative;
+        box-sizing: border-box;
     }
     
     .status-bar {
@@ -73,7 +75,8 @@ st.markdown("""
     .app-container {
         height: calc(100% - 20px);
         background: #f5f5f5;
-        overflow-y: auto;
+        overflow: hidden;
+        position: relative;
     }
     
     .nav-bar {
@@ -85,12 +88,16 @@ st.markdown("""
         justify-content: center;
         font-size: 18px;
         font-weight: 600;
+        position: relative;
+        z-index: 10;
     }
     
     .content {
         padding: 15px;
-        height: calc(100% - 44px);
+        height: calc(100% - 44px - 50px);
         overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
     
     .card {
@@ -99,6 +106,8 @@ st.markdown("""
         padding: 15px;
         margin-bottom: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .search-bar {
@@ -172,6 +181,7 @@ st.markdown("""
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
+        box-sizing: border-box;
     }
     
     .product-item {
@@ -181,6 +191,8 @@ st.markdown("""
         border: 1px solid #e9ecef;
         cursor: pointer;
         transition: transform 0.2s;
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .product-item:hover {
@@ -206,6 +218,12 @@ st.markdown("""
         color: #333;
         margin-bottom: 8px;
         line-height: 1.3;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     
     .product-price {
@@ -406,12 +424,11 @@ st.markdown("""
     }
     
     .bottom-bar {
-        position: fixed;
+        position: absolute;
         bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
         width: 100%;
-        max-width: 375px;
         background: #fff;
         padding: 15px 20px;
         border-top: 1px solid #f0f0f0;
@@ -419,6 +436,7 @@ st.markdown("""
         align-items: center;
         justify-content: space-between;
         z-index: 999;
+        box-sizing: border-box;
     }
     
     .total-amount {
@@ -509,12 +527,11 @@ st.markdown("""
     }
     
     .tab-bar {
-        position: fixed;
+        position: absolute;
         bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
         width: 100%;
-        max-width: 375px;
         height: 50px;
         background: #fff;
         border-top: 1px solid #e0e0e0;
@@ -522,6 +539,7 @@ st.markdown("""
         align-items: center;
         justify-content: space-around;
         z-index: 1000;
+        box-sizing: border-box;
     }
     
     .tab-item {
@@ -552,6 +570,18 @@ st.markdown("""
         
         .screen {
             border-radius: 0;
+        }
+        
+        .content {
+            padding: 10px;
+        }
+        
+        .product-grid {
+            gap: 10px;
+        }
+        
+        .product-item {
+            padding: 10px;
         }
     }
 </style>
