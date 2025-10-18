@@ -93,49 +93,6 @@ st.markdown("""
         overflow-y: auto;
     }
     
-    .page {
-        display: none;
-    }
-    
-    .page.active {
-        display: block;
-    }
-    
-    .tab-bar {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 375px;
-        height: 50px;
-        background: #fff;
-        border-top: 1px solid #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        z-index: 1000;
-    }
-    
-    .tab-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        padding: 5px;
-        color: #666;
-        font-size: 12px;
-    }
-    
-    .tab-item.active {
-        color: #ff6b35;
-    }
-    
-    .tab-icon {
-        font-size: 20px;
-        margin-bottom: 2px;
-    }
-    
     .card {
         background: #fff;
         border-radius: 8px;
@@ -551,51 +508,39 @@ st.markdown("""
         color: #666;
     }
     
-    .btn {
-        padding: 12px 24px;
-        border-radius: 6px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 500;
+    .tab-bar {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 375px;
+        height: 50px;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 1000;
+    }
+    
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         cursor: pointer;
-        border: none;
-    }
-    
-    .btn-primary {
-        background: #ff6b35;
-        color: #fff;
-    }
-    
-    .btn-secondary {
-        background: #f8f9fa;
+        padding: 5px;
         color: #666;
-        border: 1px solid #e9ecef;
+        font-size: 12px;
     }
     
-    .empty-state {
-        text-align: center;
-        padding: 40px 20px;
-        color: #999;
+    .tab-item.active {
+        color: #ff6b35;
     }
     
-    .empty-icon {
-        font-size: 48px;
-        margin-bottom: 15px;
-    }
-    
-    .empty-text {
-        font-size: 16px;
-        margin-bottom: 8px;
-    }
-    
-    .empty-desc {
-        font-size: 14px;
-    }
-    
-    .loading {
-        text-align: center;
-        padding: 20px;
-        color: #666;
+    .tab-icon {
+        font-size: 20px;
+        margin-bottom: 2px;
     }
     
     @media (max-width: 480px) {
@@ -974,7 +919,7 @@ def main():
     for tab_id, icon, label in tabs:
         active_class = 'active' if st.session_state.current_page == tab_id else ''
         st.markdown(f"""
-        <div class="tab-item {active_class}" onclick="switchPage('{tab_id}')">
+        <div class="tab-item {active_class}">
             <div class="tab-icon">{icon}</div>
             <div>{label}</div>
         </div>
@@ -984,16 +929,6 @@ def main():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
-    
-    # JavaScript for page switching
-    st.markdown("""
-    <script>
-        function switchPage(page) {
-            // This will trigger a rerun with the new page
-            console.log('Switching to page:', page);
-        }
-    </script>
     """, unsafe_allow_html=True)
     
     # 添加交互按钮
